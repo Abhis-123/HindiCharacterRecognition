@@ -31,16 +31,11 @@ def transform(tensor):
         to_tensor = transforms([transforms.ToTensor()])
         tensor = to_tensor(tensor)
 
-    if not torch.is_floating_point(tensor):
-        tensor.type(torch.float32)
-
-    transformations = []
-    
-
-    transformations.append(transforms.Normalize(0,1))
-    
-    t= transforms.Compose(transformations)
-    return t(tensor)
+    # if not torch.is_floating_point(tensor):
+    #     tensor= torch.FloatTensor()
+    # norm = transforms.Normalize(0,1)
+    tensor = tensor/255.0
+    return tensor
 
 
 if __name__ == "__main__":

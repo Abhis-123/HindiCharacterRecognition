@@ -10,7 +10,7 @@ def conv_layer(in_channels, out_channels,kernel_size=3,padding=1,batchnorm=False
         layers.append(nn.BatchNorm2d(out_channels))
     layers.append(nn.ReLU())
     if max_pool:
-        layers.append(nn.MaxPool2d(kernel_size=2,stride=2))
+        layers.append(nn.AvgPool2d(kernel_size=(2, 2), stride=(2, 2)))
     layer =nn.Sequential(*layers)
     return layer
 
@@ -22,6 +22,7 @@ def Dense(in_channels, out_channels,activation=None):
         layers.append(activation)
     layer= nn.Sequential(*layers)
     return layer
+    
 class CharacterRecognizer(nn.Module):
     def __init__(self,*args,**kwargs):
         super(CharacterRecognizer, self).__init__(*args,**kwargs)
@@ -32,7 +33,7 @@ class CharacterRecognizer(nn.Module):
         self.layer4= conv_layer(128,256,kernel_size=3,padding=1,batchnorm=False,max_pool=True)
         self.layer5= conv_layer(256,512,kernel_size=3,padding=1,batchnorm=True,max_pool=True)
         self.flatten = nn.Flatten()
-        self.feature_layer =    Dense(512*64//2*2*2*2*2,1024,nn.Sigmoid())
+        self.feature_layer =    Dense(512*64*2//32,1024,nn.Sigmoid())
         self.prediction_layer= Dense(1024,1,activation=nn.Sigmoid())
 
         
