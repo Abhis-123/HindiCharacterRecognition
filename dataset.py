@@ -1,6 +1,6 @@
 from torch.utils.data import Dataset
 from torchvision.io import read_image
-from common import load_train_data
+from common import load_train_dataframe
 
 class CharacterDataset(Dataset):
     def __init__(self,dataframe=None,transform=None):
@@ -26,7 +26,7 @@ class CharacterDataset(Dataset):
         return image,label   
 
 if __name__ == '__main__':
-    df = load_train_data("dataset/training")
+    df = load_train_dataframe("dataset/training")
     dataset = CharacterDataset(df)
     print(dataset.__getitem__(1)[0])
 

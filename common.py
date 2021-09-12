@@ -1,7 +1,8 @@
 import pandas as pd
 import os
-
-def load_train_data(directory):
+import torchvision.transforms as transforms  # Transformations we can perform on our dataset
+import torch
+def load_train_dataframe(directory):
     class_folders = os.listdir(directory)
     image_label_list = [] 
     for i in range(0, len(class_folders)):
@@ -13,7 +14,7 @@ def load_train_data(directory):
     df = pd.DataFrame(image_label_list)
     return df
 
-def prediction_data(path):
+def prediction_dataframe(path):
     image_label_list = [] 
     if os.path.isdir(path):
         images = os.listdir(f'{path}')
@@ -25,12 +26,22 @@ def prediction_data(path):
     return pd.DataFrame(image_label_list)
 
 
+def transform(tensor):
+    if not torch.is_tensor(tensor):
+        to_tensor = transforms([transforms.ToTensor()])
+        tensor = to_tensor(tensor)
 
+    if not torch.is_floating_point(tensor):
+        tensor.type(torch.float32)
 
+    transformations = []
+    
 
-
-
+    transformations.append(transforms.Normalize(0,1))
+    
+    t= transforms.Compose(transformations)
+    return t(tensor)
 
 
 if __name__ == "__main__":
-    print(load_train_data("./dataset/training").head(4))
+    print(load_train_dataframe("./dataset/training").head(4))
