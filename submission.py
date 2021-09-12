@@ -16,8 +16,8 @@ def generate_sample_file(filename):
     for i in range(1,100):
         test_set = str(i) + '.png'
         res[test_set] = 3
-
     write_json(filename, res)
+    
 
 if __name__ == '__main__':
-    generate_sample_file('./sample_result1.json')
+    generate_sample_file('./submission/sample_result1.json')

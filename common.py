@@ -14,7 +14,7 @@ def load_train_dataframe(directory):
     df = pd.DataFrame(image_label_list)
     return df
 
-def prediction_dataframe(path):
+def load_prediction_dataframe(path):
     image_label_list = [] 
     if os.path.isdir(path):
         images = os.listdir(f'{path}')
