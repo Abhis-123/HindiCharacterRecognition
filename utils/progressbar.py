@@ -1,3 +1,7 @@
+"""
+This script is copied from the @keras with changes according to torch and my code base
+
+"""
 import sys
 import time
 import numpy as np

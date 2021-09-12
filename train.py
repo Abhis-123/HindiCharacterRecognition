@@ -111,5 +111,7 @@ if __name__ == '__main__':
         os.makedirs("./weights")
 
     path = "./weights/net.pt"
-    torch.save(net.state_dict(),path)
+    save_weights=False
+    if save_weights:
+        torch.save(net.state_dict(),path)
 

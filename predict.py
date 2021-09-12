@@ -43,7 +43,7 @@ def predict(prediction_dataframe,net,batch_size=1,transform=None,threshold=0.5):
 
 if __name__ == '__main__':
 
-    test_images_folder = "./dataset/test"
+    test_images_folder = "./dataset/test/5.jpg"
     test_df = load_prediction_dataframe(test_images_folder)
     net = CharacterRecognizer()
     path = "./weights/net.pt"
